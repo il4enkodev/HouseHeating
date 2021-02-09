@@ -1,0 +1,68 @@
+allprojects {
+    repositories {
+        jcenter()
+        maven {
+            url 'https://maven.onehippo.com/maven2/'
+        }
+    }
+}
+
+ext {
+
+    // Android
+    androidBuildToolsVersion = "30.0.3"
+    androidMinSdkVersion = 22
+    androidTargetSdkVersion = 30
+    androidCompileSdkVersion = 30
+
+    //Libraries
+
+    daggerVersion = '2.8'
+    rxJavaVersion = '2.2.20'
+    rxAndroidVersion = '2.1.1'
+    javaxAnnotationVersion = '1.0'
+    javaxInjectVersion = '1'
+    androidAnnotationsVersion = '25.4.0'
+    appCompatVersion = '1.2.0'
+    fragmentVersion = '1.3.0-rc02'
+    materialVersion = '1.3.0'
+    constraintLayoutVersion = '2.0.4'
+    legacySupportVersion = '1.0.0'
+    lifecycleVersion = '2.2.0'
+
+
+    presentationDependencies = [
+            hilt:              "com.google.dagger:hilt-android:${hiltVersion}",
+            hiltCompiler:      "com.google.dagger:hilt-android-compiler:${hiltVersion}",
+            rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            rxAndroid:          "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+            appCompat:          "androidx.appcompat:appcompat:${appCompatVersion}",
+            fragment:           "androidx.fragment:fragment:${fragmentVersion}",
+            material:           "com.google.android.material:material:${materialVersion}",
+            constraintLayout:   "androidx.constraintlayout:constraintlayout:${constraintLayoutVersion}",
+            legacySupport:      "androidx.legacy:legacy-support-v4:${legacySupportVersion}",
+            livedata:           "androidx.lifecycle:lifecycle-livedata-ktx:${lifecycleVersion}",
+            viewmodel:          "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycleVersion}"
+    ]
+
+    domainDependencies = [
+            javaxAnnotation:    "javax.annotation:jsr305:${javaxAnnotationVersion}",
+            javaxInject:        "javax.inject:javax.inject:${javaxInjectVersion}",
+            rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
+    ]
+
+    dataDependencies = [
+            hilt:              "com.google.dagger:hilt-android:${hiltVersion}",
+            hiltCompiler:      "com.google.dagger:hilt-android-compiler:${hiltVersion}",
+
+            daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
+            dagger:             "com.google.dagger:dagger:${daggerVersion}",
+            rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            rxAndroid:          "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            javaxAnnotation:    "javax.annotation:jsr305:${javaxAnnotationVersion}",
+            javaxInject:        "javax.inject:javax.inject:${javaxInjectVersion}",
+            androidAnnotations: "com.android.support:support-annotations:${androidAnnotationsVersion}"
+    ]
+
+}

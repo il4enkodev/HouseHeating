@@ -1,0 +1,5 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.github.il4enkodev.heating.data">
+
+    <application android:allowBackup="true" />
+</manifest>

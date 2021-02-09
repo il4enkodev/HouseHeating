@@ -1,0 +1,31 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply from: 'dependencies.gradle'
+
+buildscript {
+
+    ext.hiltVersion = '2.31.2-alpha'
+
+    repositories {
+        google()
+        jcenter()
+
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:4.1.2"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:${hiltVersion}"
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    ext {
+        androidApplicationId = 'com.github.il4enkodev.househeating'
+        androidVersionCode = 1
+        androidVersionName = "1.0"
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
