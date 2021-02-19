@@ -1,24 +1,13 @@
-package com.github.il4enkodev.househeating.domain.interactor;
+package com.github.il4enkodev.househeating.domain.interactor
 
-import javax.annotation.Nonnull;
+import io.reactivex.Single
 
-import io.reactivex.Single;
+abstract class UseCaseSingle<R, A> protected constructor(
+        private val schedulerSwitcher: SchedulerSwitcher<R>) : UseCase<Single<R>, A> {
 
-import static com.github.il4enkodev.househeating.domain.Preconditions.requireNotNull;
+    protected abstract fun source(arguments: A): Single<R>
 
-public abstract class UseCaseSingle<R, A> implements UseCase<Single<R>, A> {
-
-    private final SchedulerSwitcher<R> schedulerSwitcher;
-
-    protected UseCaseSingle(SchedulerSwitcher<R> schedulerSwitcher) {
-        this.schedulerSwitcher = requireNotNull(schedulerSwitcher, "schedulerSwitcher");
-    }
-
-    @Nonnull
-    protected abstract Single<R> source(A arguments);
-
-    @Override
-    public final Single<R> execute(A arguments) {
-        return source(arguments).compose(schedulerSwitcher);
+    override fun execute(arguments: A): Single<R> {
+        return source(arguments).compose(schedulerSwitcher)
     }
 }

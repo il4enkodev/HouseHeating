@@ -6,6 +6,7 @@ buildscript {
 
 plugins {
     id 'com.android.library'
+    id 'kotlin-android'
 }
 
 android {
@@ -20,6 +21,10 @@ android {
         minSdkVersion globalConfiguration["androidMinSdkVersion"]
         targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
         versionCode globalConfiguration["androidVersionCode"]
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
     }
 
     compileOptions {
@@ -40,6 +45,7 @@ dependencies {
     def dataDependencies = rootProject.ext.dataDependencies
 
     implementation project(':domain')
+    implementation dataDependencies.kotlin
     compileOnly dataDependencies.javaxAnnotation
     implementation dataDependencies.javaxInject
     implementation dataDependencies.rxJava

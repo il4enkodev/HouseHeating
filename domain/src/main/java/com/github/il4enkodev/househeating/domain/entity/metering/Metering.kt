@@ -1,91 +1,42 @@
-package com.github.il4enkodev.househeating.domain.entity.metering;
+package com.github.il4enkodev.househeating.domain.entity.metering
 
-import com.github.il4enkodev.househeating.domain.entity.Entity;
-import com.github.il4enkodev.househeating.domain.exception.MeteringNotStartedYet;
-
-import java.time.Duration;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.concurrent.Immutable;
+import com.github.il4enkodev.househeating.domain.entity.Entity
+import com.github.il4enkodev.househeating.domain.exception.MeteringNotStartedYet
+import java.time.Duration
+import javax.annotation.concurrent.Immutable
 
 @Immutable
-public interface Metering<U> extends Entity<String> {
+interface Metering<U> : Entity<String?> {
 
-    @Nonnull
-    MeterReadings start();
+    val start: MeterReadings
+    val end: MeterReadings
+    val usage: U
+    val duration: Duration
+    val isStarted: Boolean
+    val isCompleted: Boolean
+    val isContinuing: Boolean
 
-    @Nonnull
-    MeterReadings end();
+    companion object {
 
-    @Nullable
-    U usage();
+        fun <U> notStarted(): Metering<U> {
+            @Suppress("UNCHECKED_CAST")
+            return NOT_STARTED as Metering<U>
+        }
 
-    @Nonnull
-    Duration duration();
+        private val NOT_STARTED: Metering<*> = object : Metering<Any?> {
+            override val id: String? = null
+            override val start = throw MeteringNotStartedYet(this)
+            override val end = throw MeteringNotStartedYet(this)
+            override val usage = throw MeteringNotStartedYet(this)
+            override val duration = Duration.ZERO
 
-    boolean isStarted();
+            override val isStarted = false
+            override val isCompleted = false
+            override val isContinuing = false
 
-    boolean isCompleted();
-
-    boolean isContinuing();
-
-    @SuppressWarnings("unchecked")
-    static <U> Metering<U> notStarted() {
-        return (Metering<U>) NOT_STARTED;
+            override fun toString(): String {
+                return "Metering <Not Started>"
+            }
+        }
     }
-
-    Metering<?> NOT_STARTED = new Metering<Void>() {
-
-        @Nullable
-        @Override
-        public String id() {
-            return null;
-        }
-
-        @Nonnull
-        @Override
-        public MeterReadings start() {
-            throw new com.github.il4enkodev.househeating.domain.exception.MeteringNotStartedYet(this);
-        }
-
-        @Nonnull
-        @Override
-        public MeterReadings end() {
-            throw new com.github.il4enkodev.househeating.domain.exception.MeteringNotStartedYet(this);
-        }
-
-        @Nullable
-        @Override
-        public Void usage() {
-            return null;
-        }
-
-        @Nonnull
-        @Override
-        public Duration duration() {
-            throw new MeteringNotStartedYet(this);
-        }
-
-        @Override
-        public boolean isStarted() {
-            return false;
-        }
-
-        @Override
-        public boolean isCompleted() {
-            return false;
-        }
-
-        @Override
-        public boolean isContinuing() {
-            return false;
-        }
-
-        @Override
-        public String toString() {
-            return "Metering <Not Started>";
-        }
-    };
-
 }

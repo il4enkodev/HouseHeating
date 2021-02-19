@@ -1,5 +1,5 @@
-package com.github.il4enkodev.househeating.domain.entity;
+package com.github.il4enkodev.househeating.domain.entity
 
-public interface Entity<I> {
-    I id();
+interface Entity<ID> {
+    val id: ID
 }

@@ -1,30 +1,21 @@
-package com.github.il4enkodev.househeating.domain.interactor.metering;
+package com.github.il4enkodev.househeating.domain.interactor.metering
 
-import com.github.il4enkodev.househeating.domain.entity.metering.CompletedMetering;
-import com.github.il4enkodev.househeating.domain.entity.metering.MeterReadings;
-import com.github.il4enkodev.househeating.domain.interactor.SchedulerSwitcher;
-import com.github.il4enkodev.househeating.domain.interactor.UseCaseSingle;
-import com.github.il4enkodev.househeating.domain.repository.MeteringRepository;
+import com.github.il4enkodev.househeating.domain.entity.metering.CompletedMetering
+import com.github.il4enkodev.househeating.domain.entity.metering.MeterReadings
+import com.github.il4enkodev.househeating.domain.interactor.SchedulerSwitcher
+import com.github.il4enkodev.househeating.domain.interactor.UseCaseSingle
+import com.github.il4enkodev.househeating.domain.repository.MeteringRepository
+import io.reactivex.Single
+import javax.annotation.Nonnull
+import javax.inject.Inject
 
-import javax.annotation.Nonnull;
-import javax.inject.Inject;
-
-import io.reactivex.Single;
-
-public class StopMetering extends UseCaseSingle<CompletedMetering, MeterReadings> {
-
-    private final MeteringRepository meteringRepository;
-
-    @Inject
-    StopMetering(SchedulerSwitcher<CompletedMetering> schedulerSwitcher,
-                 MeteringRepository meteringRepository) {
-        super(schedulerSwitcher);
-        this.meteringRepository = meteringRepository;
-    }
+class StopMetering @Inject internal constructor(
+        schedulerSwitcher: SchedulerSwitcher<CompletedMetering>,
+        private val meteringRepository: MeteringRepository
+) : UseCaseSingle<CompletedMetering, MeterReadings>(schedulerSwitcher) {
 
     @Nonnull
-    @Override
-    protected Single<CompletedMetering> source(MeterReadings readings) {
-        return meteringRepository.stopMetering(readings);
+    override fun source(arguments: MeterReadings): Single<CompletedMetering> {
+        return meteringRepository.stopMetering(arguments)
     }
 }

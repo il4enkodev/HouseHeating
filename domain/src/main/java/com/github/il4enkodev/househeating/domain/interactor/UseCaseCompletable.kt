@@ -1,21 +1,13 @@
-package com.github.il4enkodev.househeating.domain.interactor;
+package com.github.il4enkodev.househeating.domain.interactor
 
-import io.reactivex.Completable;
+import io.reactivex.Completable
 
-import static com.github.il4enkodev.househeating.domain.Preconditions.requireNotNull;
+abstract class UseCaseCompletable<A> protected constructor(
+        private val schedulerSwitcher: SchedulerSwitcher<*>) : UseCase<Completable, A> {
 
-public abstract class UseCaseCompletable<A> implements UseCase<Completable, A> {
+    protected abstract fun source(arguments: A): Completable
 
-    private final SchedulerSwitcher<?> schedulerSwitcher;
-
-    protected UseCaseCompletable(SchedulerSwitcher<?> schedulerSwitcher) {
-        this.schedulerSwitcher = requireNotNull(schedulerSwitcher, "schedulerSwitcher");
-    }
-
-    protected abstract Completable source(A arguments);
-
-    @Override
-    public final Completable execute(A arguments) {
-        return source(arguments).compose(schedulerSwitcher);
+    override fun execute(arguments: A): Completable {
+        return source(arguments).compose(schedulerSwitcher)
     }
 }

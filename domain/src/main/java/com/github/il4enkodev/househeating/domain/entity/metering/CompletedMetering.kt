@@ -1,46 +1,13 @@
-package com.github.il4enkodev.househeating.domain.entity.metering;
+package com.github.il4enkodev.househeating.domain.entity.metering
 
-import java.time.Duration;
-import java.time.ZonedDateTime;
+import java.time.Duration
 
-import javax.annotation.Nonnull;
+class CompletedMetering internal constructor(id: String,
+                                             start: MeterReadings,
+                                             override val end: MeterReadings
+) : AbstractMetering<Double>(id, start) {
 
-import static com.github.il4enkodev.househeating.domain.Preconditions.requireNotNull;
-
-public class CompletedMetering extends AbstractMetering<Double> {
-
-    private final MeterReadings readingsOnComplete;
-
-    CompletedMetering(@Nonnull String id,
-                      @Nonnull MeterReadings readingsOnStart,
-                      @Nonnull MeterReadings readingsOnComplete) {
-        super(id, readingsOnStart);
-        this.readingsOnComplete = requireNotNull(readingsOnComplete, "readingsOnComplete");
-    }
-
-    @Nonnull
-    @Override
-    public Double usage() {
-        return end().getValue() - start().getValue();
-    }
-
-    @Nonnull
-    @Override
-    public Duration duration() {
-        final ZonedDateTime start = start().getTime();
-        final ZonedDateTime complete = end().getTime();
-        // TODO Check same TZ?
-        return Duration.between(complete, start);
-    }
-
-    @Nonnull
-    @Override
-    public final MeterReadings end() {
-        return readingsOnComplete;
-    }
-
-    @Override
-    public final boolean isCompleted() {
-        return true;
-    }
+    override val isCompleted = true
+    override val usage: Double by lazy { end.value - start.value }
+    override val duration: Duration by lazy { Duration.between(start.time, end.time) }
 }

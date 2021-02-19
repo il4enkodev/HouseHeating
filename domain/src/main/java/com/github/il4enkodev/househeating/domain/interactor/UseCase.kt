@@ -1,7 +1,5 @@
-package com.github.il4enkodev.househeating.domain.interactor;
+package com.github.il4enkodev.househeating.domain.interactor
 
-public interface UseCase<R, A> {
-
-    R execute(A arguments);
-
+interface UseCase<R, A> {
+    fun execute(arguments: A): R
 }

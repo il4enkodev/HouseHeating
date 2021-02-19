@@ -1,36 +1,23 @@
-package com.github.il4enkodev.househeating.domain.repository;
+package com.github.il4enkodev.househeating.domain.repository
 
-import com.github.il4enkodev.househeating.domain.entity.metering.CompletedMetering;
-import com.github.il4enkodev.househeating.domain.entity.metering.ContinuingMetering;
-import com.github.il4enkodev.househeating.domain.entity.metering.MeterReadings;
-import com.github.il4enkodev.househeating.domain.entity.metering.Metering;
+import com.github.il4enkodev.househeating.domain.entity.metering.CompletedMetering
+import com.github.il4enkodev.househeating.domain.entity.metering.ContinuingMetering
+import com.github.il4enkodev.househeating.domain.entity.metering.MeterReadings
+import com.github.il4enkodev.househeating.domain.entity.metering.Metering
+import io.reactivex.Completable
+import io.reactivex.Observable
+import io.reactivex.Single
 
-import java.util.List;
+interface MeteringRepository {
+    fun create(onStart: MeterReadings?, onComplete: MeterReadings?): Single<CompletedMetering>
+    fun observe(): Observable<List<CompletedMetering>>
+    fun current(): Observable<Metering<Double>>
+    fun startMetering(readings: MeterReadings): Single<ContinuingMetering>
+    fun stopMetering(readings: MeterReadings): Single<CompletedMetering>
+    operator fun get(id: String): Single<CompletedMetering>
+    fun update(id: String,
+               onStart: MeterReadings?,
+               onComplete: MeterReadings?): Single<CompletedMetering>
 
-import javax.annotation.Nullable;
-
-import io.reactivex.Completable;
-import io.reactivex.Observable;
-import io.reactivex.Single;
-
-public interface MeteringRepository {
-
-    Single<CompletedMetering> create(MeterReadings onStart, MeterReadings onComplete);
-
-    Observable<List<CompletedMetering>> observe();
-
-    Observable<Metering<Double>> current();
-
-    Single<ContinuingMetering> startMetering(MeterReadings readings);
-
-    Single<CompletedMetering> stopMetering(MeterReadings readings);
-
-    Single<CompletedMetering> get(String id);
-
-    Single<CompletedMetering> update(String id,
-                                     @Nullable MeterReadings onStart,
-                                     @Nullable MeterReadings onComplete);
-
-    Completable delete(String id);
-
+    fun delete(id: String): Completable
 }

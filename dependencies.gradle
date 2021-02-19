@@ -17,7 +17,6 @@ ext {
 
     //Libraries
 
-    daggerVersion = '2.8'
     rxJavaVersion = '2.2.20'
     rxAndroidVersion = '2.1.1'
     javaxAnnotationVersion = '1.0'
@@ -32,8 +31,9 @@ ext {
 
 
     presentationDependencies = [
-            hilt:              "com.google.dagger:hilt-android:${hiltVersion}",
-            hiltCompiler:      "com.google.dagger:hilt-android-compiler:${hiltVersion}",
+            kotlin:             "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
+            hilt:               "com.google.dagger:hilt-android:${hilt_version}",
+            hiltCompiler:       "com.google.dagger:hilt-android-compiler:${hilt_version}",
             rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
             rxAndroid:          "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
             javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
@@ -47,17 +47,19 @@ ext {
     ]
 
     domainDependencies = [
+            kotlin:             "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
             javaxAnnotation:    "javax.annotation:jsr305:${javaxAnnotationVersion}",
             javaxInject:        "javax.inject:javax.inject:${javaxInjectVersion}",
             rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
     ]
 
     dataDependencies = [
-            hilt:              "com.google.dagger:hilt-android:${hiltVersion}",
-            hiltCompiler:      "com.google.dagger:hilt-android-compiler:${hiltVersion}",
+            kotlin:             "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
+            hilt:              "com.google.dagger:hilt-android:${hilt_version}",
+            hiltCompiler:      "com.google.dagger:hilt-android-compiler:${hilt_version}",
 
-            daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
-            dagger:             "com.google.dagger:dagger:${daggerVersion}",
+//            daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
+//            dagger:             "com.google.dagger:dagger:${daggerVersion}",
             rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
             rxAndroid:          "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
             javaxAnnotation:    "javax.annotation:jsr305:${javaxAnnotationVersion}",

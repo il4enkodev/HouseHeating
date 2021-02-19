@@ -1,27 +1,18 @@
-package com.github.il4enkodev.househeating.domain.interactor.metering;
+package com.github.il4enkodev.househeating.domain.interactor.metering
 
-import com.github.il4enkodev.househeating.domain.entity.metering.Metering;
-import com.github.il4enkodev.househeating.domain.interactor.SchedulerSwitcher;
-import com.github.il4enkodev.househeating.domain.interactor.UseCaseObservable;
-import com.github.il4enkodev.househeating.domain.repository.MeteringRepository;
+import com.github.il4enkodev.househeating.domain.entity.metering.Metering
+import com.github.il4enkodev.househeating.domain.interactor.SchedulerSwitcher
+import com.github.il4enkodev.househeating.domain.interactor.UseCaseObservable
+import com.github.il4enkodev.househeating.domain.repository.MeteringRepository
+import io.reactivex.Observable
+import javax.inject.Inject
 
-import javax.inject.Inject;
+class CurrentMetering @Inject internal constructor(
+        schedulerSwitcher: SchedulerSwitcher<Metering<Double>>,
+        private val meteringRepository: MeteringRepository
+) : UseCaseObservable<Metering<Double>, Nothing>(schedulerSwitcher) {
 
-import io.reactivex.Observable;
-
-public class CurrentMetering extends UseCaseObservable<Metering<Double>, Void> {
-
-    private final MeteringRepository meteringRepository;
-
-    @Inject
-    CurrentMetering(SchedulerSwitcher<Metering<Double>> schedulerSwitcher,
-                    MeteringRepository meteringRepository) {
-        super(schedulerSwitcher);
-        this.meteringRepository = meteringRepository;
-    }
-
-    @Override
-    protected Observable<Metering<Double>> source(Void arguments) {
-        return meteringRepository.current();
+    override fun source(arguments: Nothing): Observable<Metering<Double>> {
+        return meteringRepository.current()
     }
 }

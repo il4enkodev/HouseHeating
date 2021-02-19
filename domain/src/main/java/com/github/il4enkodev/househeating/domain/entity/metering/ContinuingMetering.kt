@@ -1,39 +1,19 @@
-package com.github.il4enkodev.househeating.domain.entity.metering;
+package com.github.il4enkodev.househeating.domain.entity.metering
 
-import com.github.il4enkodev.househeating.domain.exception.MeteringNotCompletedYet;
+import com.github.il4enkodev.househeating.domain.exception.MeteringNotCompletedYet
+import java.time.Duration
+import java.time.ZonedDateTime
 
-import java.time.Duration;
-import java.time.ZonedDateTime;
+class ContinuingMetering(id: String,
+                         start: MeterReadings): AbstractMetering<Double>(id, start) {
 
-import javax.annotation.Nonnull;
+    override val duration: Duration
+        get()  = Duration.between(start.time,
+                ZonedDateTime.now().withZoneSameInstant(start.time.zone))
 
-public class ContinuingMetering extends AbstractMetering<Double> {
+    override val end = throw MeteringNotCompletedYet(this)
+    override val usage = throw MeteringNotCompletedYet(this)
 
-    public ContinuingMetering(@Nonnull String id, @Nonnull MeterReadings readingsOnStart) {
-        super(id, readingsOnStart);
-    }
 
-    @Nonnull
-    @Override
-    public final MeterReadings end() {
-        throw new MeteringNotCompletedYet(this);
-    }
-
-    @Override
-    public final boolean isCompleted() {
-        return false;
-    }
-
-    @Override
-    public Double usage() {
-        return null;
-    }
-
-    @Nonnull
-    @Override
-    public Duration duration() {
-        final ZonedDateTime startTime = start().getTime();
-        return Duration.between(startTime,
-                ZonedDateTime.now().withZoneSameInstant(startTime.getZone()));
-    }
+    override val isCompleted = false
 }

@@ -1,30 +1,19 @@
-package com.github.il4enkodev.househeating.domain.interactor.metering;
+package com.github.il4enkodev.househeating.domain.interactor.metering
 
-import com.github.il4enkodev.househeating.domain.entity.metering.ContinuingMetering;
-import com.github.il4enkodev.househeating.domain.entity.metering.MeterReadings;
-import com.github.il4enkodev.househeating.domain.interactor.SchedulerSwitcher;
-import com.github.il4enkodev.househeating.domain.interactor.UseCaseSingle;
-import com.github.il4enkodev.househeating.domain.repository.MeteringRepository;
+import com.github.il4enkodev.househeating.domain.entity.metering.ContinuingMetering
+import com.github.il4enkodev.househeating.domain.entity.metering.MeterReadings
+import com.github.il4enkodev.househeating.domain.interactor.SchedulerSwitcher
+import com.github.il4enkodev.househeating.domain.interactor.UseCaseSingle
+import com.github.il4enkodev.househeating.domain.repository.MeteringRepository
+import io.reactivex.Single
+import javax.inject.Inject
 
-import javax.annotation.Nonnull;
-import javax.inject.Inject;
+class StartMetering @Inject internal constructor(
+        schedulerSwitcher: SchedulerSwitcher<ContinuingMetering>,
+        private val meteringRepository: MeteringRepository
+) : UseCaseSingle<ContinuingMetering, MeterReadings>(schedulerSwitcher) {
 
-import io.reactivex.Single;
-
-public class StartMetering extends UseCaseSingle<ContinuingMetering, MeterReadings> {
-
-    private final MeteringRepository meteringRepository;
-
-    @Inject
-    StartMetering(SchedulerSwitcher<ContinuingMetering> schedulerSwitcher,
-                  MeteringRepository meteringRepository) {
-        super(schedulerSwitcher);
-        this.meteringRepository = meteringRepository;
-    }
-
-    @Nonnull
-    @Override
-    protected Single<ContinuingMetering> source(MeterReadings readings) {
-        return meteringRepository.startMetering(readings);
+    override fun source(arguments: MeterReadings): Single<ContinuingMetering> {
+        return meteringRepository.startMetering(arguments)
     }
 }

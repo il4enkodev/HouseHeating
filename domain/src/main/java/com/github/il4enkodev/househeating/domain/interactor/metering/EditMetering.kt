@@ -1,34 +1,20 @@
-package com.github.il4enkodev.househeating.domain.interactor.metering;
+package com.github.il4enkodev.househeating.domain.interactor.metering
 
-import com.github.il4enkodev.househeating.domain.entity.metering.CompletedMetering;
-import com.github.il4enkodev.househeating.domain.interactor.SchedulerSwitcher;
-import com.github.il4enkodev.househeating.domain.interactor.UseCaseSingle;
-import com.github.il4enkodev.househeating.domain.repository.MeteringRepository;
+import com.github.il4enkodev.househeating.domain.entity.metering.CompletedMetering
+import com.github.il4enkodev.househeating.domain.interactor.SchedulerSwitcher
+import com.github.il4enkodev.househeating.domain.interactor.UseCaseSingle
+import com.github.il4enkodev.househeating.domain.repository.MeteringRepository
+import io.reactivex.Single
+import javax.inject.Inject
 
-import javax.annotation.Nonnull;
-import javax.inject.Inject;
+class EditMetering @Inject internal constructor(
+        schedulerSwitcher: SchedulerSwitcher<CompletedMetering>,
+        private val meteringRepository: MeteringRepository
+) : UseCaseSingle<CompletedMetering, EditMetering.Arguments>(schedulerSwitcher) {
 
-import io.reactivex.Single;
-
-public class EditMetering extends UseCaseSingle<CompletedMetering, EditMetering.Arguments> {
-
-    private final MeteringRepository meteringRepository;
-
-    @Inject
-    EditMetering(SchedulerSwitcher<CompletedMetering> schedulerSwitcher,
-                 MeteringRepository meteringRepository) {
-        super(schedulerSwitcher);
-        this.meteringRepository = meteringRepository;
+    override fun source(arguments: Arguments): Single<CompletedMetering> {
+        throw UnsupportedOperationException("Not implemented")
     }
 
-    @Nonnull
-    @Override
-    protected Single<CompletedMetering> source(Arguments arguments) {
-        throw new UnsupportedOperationException("Not implemented");
-    }
-
-    public static class Arguments {
-
-    }
-
+    class Arguments
 }

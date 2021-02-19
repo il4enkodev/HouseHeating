@@ -1,10 +1,8 @@
-package com.github.il4enkodev.househeating.domain.exception;
+package com.github.il4enkodev.househeating.domain.exception
 
-import com.github.il4enkodev.househeating.domain.entity.metering.Metering;
+import com.github.il4enkodev.househeating.domain.entity.metering.Metering
 
-public class MeteringNotCompletedYet extends IllegalMeteringStateException {
-
-    public MeteringNotCompletedYet(Metering<?> metering) {
-        super(metering);
-    }
-}
+class MeteringNotCompletedYet(metering: Metering<*>,
+                              message: String? = null,
+                              cause: Throwable? = null
+) : IllegalMeteringStateException(metering, message, cause)
