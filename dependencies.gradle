@@ -44,7 +44,10 @@ ext {
             constraintLayout:   "androidx.constraintlayout:constraintlayout:${constraintLayoutVersion}",
             legacySupport:      "androidx.legacy:legacy-support-v4:${legacySupportVersion}",
             livedata:           "androidx.lifecycle:lifecycle-livedata-ktx:${lifecycleVersion}",
-            viewmodel:          "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycleVersion}"
+            viewmodel:          "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycleVersion}",
+
+            navFragment:        "androidx.navigation:navigation-fragment-ktx:$nav_version",
+            navUi:              "androidx.navigation:navigation-ui-ktx:$nav_version"
     ]
 
     domainDependencies = [
@@ -59,8 +62,6 @@ ext {
             hilt:              "com.google.dagger:hilt-android:${hilt_version}",
             hiltCompiler:      "com.google.dagger:hilt-android-compiler:${hilt_version}",
 
-//            daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
-//            dagger:             "com.google.dagger:dagger:${daggerVersion}",
             rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
             rxAndroid:          "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
             javaxAnnotation:    "javax.annotation:jsr305:${javaxAnnotationVersion}",

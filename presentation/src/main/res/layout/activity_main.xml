@@ -5,14 +5,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context=".presentation.ui.MainActivity">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <!--TODO: Add Nav Host-->
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/nav_host_fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/nav_graph" />
 
     </androidx.core.widget.NestedScrollView>
 

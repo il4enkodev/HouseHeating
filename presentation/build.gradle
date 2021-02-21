@@ -44,6 +44,7 @@ android {
 }
 
 dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     def presentationDependencies = rootProject.ext.presentationDependencies
 
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.1'
@@ -64,6 +65,9 @@ dependencies {
     implementation presentationDependencies.legacySupport
     implementation presentationDependencies.livedata
     implementation presentationDependencies.viewmodel
+
+    implementation presentationDependencies.navFragment
+    implementation presentationDependencies.navUi
 }
 
 repositories {

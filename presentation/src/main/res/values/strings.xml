@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">House Heating</string>
-    <string name="nav_log">Metering log</string>
-    <string name="nav_statistics">Statistics</string>
+    <string name="nav_log">Meterings Log</string>
+    <string name="nav_statistic">Statistic</string>
     <string name="nav_settings">Settings</string>
 
     <!-- Not translatable -->
     <string name="navigation_sheet_behavior" translatable="false">
-        com.github.il4enkodev.househeating.presentation.ui.behaviour.NavigationSheetBehaviour
+        com.github.il4enkodev.househeating.presentation.ui.behavior.NavigationSheetBehavior
     </string>
 
 </resources>

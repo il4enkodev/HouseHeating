@@ -2,6 +2,8 @@ package com.github.il4enkodev.househeating.presentation.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.github.il4enkodev.househeating.R
 import com.github.il4enkodev.househeating.presentation.ui.behavior.NavigationSheetBehavior
 import com.google.android.material.bottomappbar.BottomAppBar
@@ -26,10 +28,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         navView = findViewById(R.id.navView)
-        navView.setNavigationItemSelectedListener{
-            it.isChecked = true
-            behavior.expanded = false
-            true
+//        navView.setNavigationItemSelectedListener{
+//            it.isChecked = true
+//            behavior.expanded = false
+//            true
+//        }
+
+        val navHostFragment = supportFragmentManager
+                .findFragmentById(R.id.nav_host_fragment) as? NavHostFragment
+        navHostFragment?.navController?.let {
+            navView.setupWithNavController(it)
         }
 
         behavior = NavigationSheetBehavior.from(navView)

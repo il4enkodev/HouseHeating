@@ -10,6 +10,15 @@
         <item name="android:paddingBottom">?attr/actionBarSize</item>
     </style>
 
+    <style name="Widget.App.TextView.Stub" parent="Widget.MaterialComponents.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">36dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textAppearance">?attr/textAppearanceHeadline3</item>
+    </style>
+
     <style name="Behavior.BottomSheet" parent="">
         <item name="behavior_hideable">true</item>
         <item name="shapeAppearance">?attr/shapeAppearanceLargeComponent</item>

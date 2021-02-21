@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/meteringLogFragment">
+
+    <fragment
+        android:id="@+id/meteringLogFragment"
+        android:name="com.github.il4enkodev.househeating.presentation.ui.fragment.meterings.MeteringsLogFragment"
+        android:label="MeteringLogFragment"
+        tools:layout="@layout/meterings_log_fragment" >
+        <action
+            android:id="@+id/action_metering_detail"
+            app:destination="@id/meteringDetailFragment" />
+        <action
+            android:id="@+id/action_add_readings"
+            app:destination="@id/readingsEditDialog" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.github.il4enkodev.househeating.presentation.ui.fragment.setting.SettingsFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/settings_fragment" />
+    <fragment
+        android:id="@+id/statisticFragment"
+        android:name="com.github.il4enkodev.househeating.presentation.ui.fragment.statistic.StatisticFragment"
+        android:label="StatisticFragment"
+        tools:layout="@layout/statistic_fragment" />
+    <dialog
+        android:id="@+id/readingsEditDialog"
+        android:name="com.github.il4enkodev.househeating.presentation.ui.fragment.readings.ReadingsEditDialog"
+        android:label="ReadingsEditDialog" />
+    <fragment
+        android:id="@+id/meteringDetailFragment"
+        android:name="com.github.il4enkodev.househeating.presentation.ui.fragment.detail.MeteringsDetailFragment"
+        android:label="MeteringDetailFragment"
+        tools:layout="@layout/meterings_detail_fragment" >
+        <action
+            android:id="@+id/action_edit_reading"
+            app:destination="@id/readingsEditDialog" />
+    </fragment>
+
+</navigation>

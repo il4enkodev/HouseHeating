@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="corner_size_large" type="dimen">8dp</item>
+    <item name="corner_size_large" type="dimen">6dp</item>
 </resources>
