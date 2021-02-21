@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.github.il4enkodev.househeating.presentation.ui.fragment.setting.SettingsFragment"
+        android:name="com.github.il4enkodev.househeating.presentation.ui.fragment.settings.SettingsFragment"
         android:label="SettingsFragment"
         tools:layout="@layout/settings_fragment" />
     <fragment
@@ -33,7 +33,7 @@
         android:label="ReadingsEditDialog" />
     <fragment
         android:id="@+id/meteringDetailFragment"
-        android:name="com.github.il4enkodev.househeating.presentation.ui.fragment.detail.MeteringsDetailFragment"
+        android:name="com.github.il4enkodev.househeating.presentation.ui.fragment.details.MeteringsDetailFragment"
         android:label="MeteringDetailFragment"
         tools:layout="@layout/meterings_detail_fragment" >
         <action

@@ -1,4 +1,4 @@
-package com.github.il4enkodev.househeating.presentation.ui.fragment.setting
+package com.github.il4enkodev.househeating.presentation.ui.fragment.settings
 
 import android.os.Bundle
 import android.view.LayoutInflater

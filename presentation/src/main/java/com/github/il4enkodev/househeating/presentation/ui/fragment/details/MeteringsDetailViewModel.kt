@@ -1,4 +1,4 @@
-package com.github.il4enkodev.househeating.presentation.ui.fragment.detail
+package com.github.il4enkodev.househeating.presentation.ui.fragment.details
 
 import androidx.lifecycle.ViewModel
 
