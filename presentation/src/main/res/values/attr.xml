@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="NavigationSheetBehavior">
+        <attr name="behavior_scrim_color" format="color" />
+        <attr name="behavior_scrim_emphasis" format="float" />
+        <attr name="behavior_scrim_clickable" format="boolean" />
+        <attr name="behavior_shape_animation_disabled" format="boolean" />
+        <attr name="behavior_expanded" format="boolean" />
+    </declare-styleable>
+</resources>

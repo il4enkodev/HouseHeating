@@ -9,7 +9,7 @@
         android:name="com.github.il4enkodev.househeating.presentation.AndroidApplication"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Heating">
+        android:theme="@style/Theme.App">
         <activity android:name="com.github.il4enkodev.househeating.presentation.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

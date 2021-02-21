@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ShapeAppearance.App.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerSize">@dimen/corner_size_large</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
+    <style name="Widget.App.NavigationView" parent="Widget.MaterialComponents.NavigationView">
+        <item name="elevation">0dp</item>
+        <item name="android:paddingBottom">?attr/actionBarSize</item>
+    </style>
+
+    <style name="Behavior.BottomSheet" parent="">
+        <item name="behavior_hideable">true</item>
+        <item name="shapeAppearance">?attr/shapeAppearanceLargeComponent</item>
+        <item name="layout_behavior">@string/bottom_sheet_behavior</item>
+    </style>
+
+    <style name="Behavior.BottomSheet.Navigation" parent="Behavior.BottomSheet">
+        <item name="layout_behavior">@string/navigation_sheet_behavior</item>
+        <item name="behavior_expanded">false</item>
+        <item name="behavior_scrim_color">@color/black</item>
+        <item name="behavior_scrim_emphasis">@dimen/material_emphasis_medium</item>
+        <item name="behavior_scrim_clickable">true</item>
+        <item name="behavior_shape_animation_disabled">true</item>
+    </style>
+</resources>

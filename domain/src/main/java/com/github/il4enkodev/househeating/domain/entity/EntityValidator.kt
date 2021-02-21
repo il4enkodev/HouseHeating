@@ -4,7 +4,7 @@ import com.github.il4enkodev.househeating.domain.exception.IllegalEntityStateExc
 import io.reactivex.functions.Function
 
 @FunctionalInterface
-interface EntityValidator<T : Entity<*>?> : Function<T, T> {
+interface EntityValidator<T : Entity<*>> : Function<T, T> {
 
     @Throws(IllegalEntityStateException::class)
     fun validate(entity: T)
