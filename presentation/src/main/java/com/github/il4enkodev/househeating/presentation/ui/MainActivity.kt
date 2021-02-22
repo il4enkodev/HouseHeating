@@ -1,20 +1,25 @@
 package com.github.il4enkodev.househeating.presentation.ui
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.setupWithNavController
 import com.github.il4enkodev.househeating.R
 import com.github.il4enkodev.househeating.presentation.ui.behavior.NavigationSheetBehavior
 import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var fab: FloatingActionButton
     private lateinit var navView: NavigationView
     private lateinit var bottomBar: BottomAppBar
     private lateinit var behavior: NavigationSheetBehavior<NavigationView>
+
+    private val fabViewModel: FabViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,5 +35,11 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(findNavController())
 
         behavior = NavigationSheetBehavior.from(navView)
+
+        fab = findViewById(R.id.fab)
+        fab.setOnClickListener { fabViewModel.clicked() }
+        fabViewModel.visibility().observe(this) { visible ->
+            if (visible) fab.show() else fab.hide()
+        }
     }
 }
