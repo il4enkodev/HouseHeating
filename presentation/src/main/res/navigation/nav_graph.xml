@@ -30,7 +30,8 @@
     <dialog
         android:id="@+id/readingsEditDialog"
         android:name="com.github.il4enkodev.househeating.presentation.ui.fragment.readings.ReadingsEditDialog"
-        android:label="ReadingsEditDialog" />
+        android:label="ReadingsEditDialog"
+        tools:layout="@layout/readings_edit_dialog"/>
     <fragment
         android:id="@+id/meteringDetailFragment"
         android:name="com.github.il4enkodev.househeating.presentation.ui.fragment.details.MeteringsDetailFragment"
