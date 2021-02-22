@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.github.il4enkodev.househeating.R
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ReadingsEditDialog: BottomSheetDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater,

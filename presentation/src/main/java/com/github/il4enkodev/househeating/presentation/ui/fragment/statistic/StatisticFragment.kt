@@ -5,26 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import com.github.il4enkodev.househeating.R
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class StatisticFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = StatisticFragment()
-    }
-
-    private lateinit var viewModel: StatisticViewModel
+    private val viewModel: StatisticViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.statistic_fragment, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(StatisticViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
 }
