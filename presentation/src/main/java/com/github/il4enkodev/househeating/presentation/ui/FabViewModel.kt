@@ -4,7 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.il4enkodev.househeating.presentation.ui.events.ClickEvent
-import com.github.il4enkodev.househeating.presentation.ui.events.SingleLiveEvent
+import com.github.il4enkodev.househeating.presentation.ui.events.LiveEvent
+import com.github.il4enkodev.househeating.presentation.ui.events.LiveEvent.NotificationStrategy
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -16,9 +17,11 @@ class FabViewModel @Inject constructor() : ViewModel() {
     private val visibility = MutableLiveData<Boolean>()
 
     fun clicks(): LiveData<ClickEvent> = clicks
-    private val clicks = SingleLiveEvent<ClickEvent> { visibility.value = it }
+    private val clicks = LiveEvent<ClickEvent>(NotificationStrategy.NOTIFY_LAST) {
+        visibility.value = it
+    }
 
     fun clicked() {
-        clicks += ClickEvent
+        clicks.push(ClickEvent)
     }
 }

@@ -16,4 +16,7 @@ class ReadingsEditDialog: BottomSheetDialogFragment() {
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.readings_edit_dialog, container, false)
     }
+
+
+    
 }

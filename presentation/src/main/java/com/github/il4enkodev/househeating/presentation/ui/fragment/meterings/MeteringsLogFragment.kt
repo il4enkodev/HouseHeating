@@ -20,9 +20,6 @@ class MeteringsLogFragment: Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        fabViewModel.clicks().observe(viewLifecycleOwner) {
-            Toast.makeText(requireContext(), "Fab clicked", Toast.LENGTH_SHORT).show()
-        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -30,4 +27,9 @@ class MeteringsLogFragment: Fragment() {
         return inflater.inflate(R.layout.meterings_log_fragment, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        fabViewModel.clicks().observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), "Fab clicked", Toast.LENGTH_SHORT).show()
+        }
+    }
 }
