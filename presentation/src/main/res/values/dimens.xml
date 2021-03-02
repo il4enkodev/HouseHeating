@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <item name="view_spacing_medium" type="dimen">16dp</item>
+    <item name="view_spacing_small" type="dimen">8dp</item>
     <item name="corner_size_large" type="dimen">6dp</item>
+    <item name="chip_icon_size" type="dimen">20dp</item>
+    <item name="chip_horizontal_padding" type="dimen">10dp</item>
+    <item name="chip_text_padding" type="dimen">4dp</item>
+    <item name="chip_text_size" type="dimen">13sp</item>
+    <item name="chip_min_height" type="dimen">36dp</item>
 </resources>

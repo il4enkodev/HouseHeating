@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="dialogButtonStyle" format="reference" />
+    <attr name="shapeAppearanceBottomSheet" format="reference" />
     <declare-styleable name="NavigationSheetBehavior">
         <attr name="behavior_scrim_color" format="color" />
         <attr name="behavior_scrim_emphasis" format="float" />

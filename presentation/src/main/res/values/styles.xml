@@ -5,9 +5,31 @@
         <item name="cornerFamily">rounded</item>
     </style>
 
+    <style name="ShapeAppearance.App.BottomSheet" parent="ShapeAppearance.App.LargeComponent">
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+
     <style name="Widget.App.NavigationView" parent="Widget.MaterialComponents.NavigationView">
         <item name="elevation">0dp</item>
         <item name="android:paddingBottom">?attr/actionBarSize</item>
+    </style>
+
+    <style name="Widget.App.Button.Borderless.Dialog" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textAppearance">@style/TextAppearance.App.Button.Dialog</item>
+        <item name="android:inputType">textCapWords</item>
+    </style>
+
+    <style name="Widget.App.ChipView" parent="Widget.MaterialComponents.Chip.Action">
+        <item name="chipIconSize">@dimen/chip_icon_size</item>
+        <item name="iconStartPadding">@dimen/chip_horizontal_padding</item>
+        <item name="textEndPadding">@dimen/chip_horizontal_padding</item>
+        <item name="textStartPadding">@dimen/chip_text_padding</item>
+        <item name="android:textSize">@dimen/chip_text_size</item>
+        <item name="chipMinHeight">@dimen/chip_min_height</item>
+        <item name="android:textAppearance">@style/TextAppearance.App.ChipView</item>
+        <item name="chipIconTint">?attr/colorPrimary</item>
+        <item name="chipStrokeColor">?attr/colorControlNormal</item>
     </style>
 
     <style name="Widget.App.TextView.Stub" parent="Widget.MaterialComponents.TextView">
@@ -19,9 +41,14 @@
         <item name="android:textAppearance">?attr/textAppearanceHeadline3</item>
     </style>
 
+    <style name="Widget.App.BottomSheet" parent="Widget.MaterialComponents.BottomSheet">
+        <item name="shapeAppearanceOverlay">?attr/shapeAppearanceBottomSheet</item>
+    </style>
+
+
     <style name="Behavior.BottomSheet" parent="">
         <item name="behavior_hideable">true</item>
-        <item name="shapeAppearance">?attr/shapeAppearanceLargeComponent</item>
+        <item name="shapeAppearance">?attr/shapeAppearanceBottomSheet</item>
         <item name="layout_behavior">@string/bottom_sheet_behavior</item>
     </style>
 
@@ -33,4 +60,6 @@
         <item name="behavior_scrim_clickable">true</item>
         <item name="behavior_shape_animation_disabled">true</item>
     </style>
+
+
 </resources>

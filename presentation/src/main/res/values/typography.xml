@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextAppearance.App.Button" parent="TextAppearance.AppCompat.Widget.Button.Borderless.Colored">
+        <item name="fontStyle">normal</item>
+<!--        <item name="android:fontFamily">@font/google_sans_medium</item>-->
+    </style>
+    <style name="TextAppearance.App.Button.Dialog">
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="TextAppearance.App.Button.Icon">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextAppearance.App.ChipView" parent="TextAppearance.AppCompat.Body2" />
+</resources>

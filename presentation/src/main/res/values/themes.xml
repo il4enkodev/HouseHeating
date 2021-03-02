@@ -15,7 +15,21 @@
         <!-- Customize your theme here. -->
 
         <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.App.LargeComponent</item>
+        <item name="shapeAppearanceBottomSheet">@style/ShapeAppearance.App.BottomSheet</item>
+
+        <item name="bottomSheetDialogTheme">@style/Theme.App.BottomSheetDialog</item>
+
         <item name="navigationViewStyle">@style/Widget.App.NavigationView</item>
+        <item name="dialogButtonStyle">@style/Widget.App.Button.Borderless.Dialog</item>
+        <item name="chipStyle">@style/Widget.App.ChipView</item>
+    </style>
+
+    <style name="Theme.App.BottomSheetDialog" parent="Theme.MaterialComponents.DayNight.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="bottomSheetStyle">@style/Widget.App.BottomSheet</item>
+        <item name="chipStyle">@style/Widget.App.ChipView</item>
     </style>
 
 
