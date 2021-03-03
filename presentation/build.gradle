@@ -67,8 +67,10 @@ dependencies {
     implementation presentationDependencies.livedata
     implementation presentationDependencies.viewmodel
 
-    implementation "androidx.navigation:navigation-fragment-ktx:2.3.3"
-    implementation "androidx.navigation:navigation-ui-ktx:2.3.3"
+    implementation presentationDependencies.navFragment
+    implementation presentationDependencies.navUi
+
+    implementation presentationDependencies.timber
 }
 
 repositories {

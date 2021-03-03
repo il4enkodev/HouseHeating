@@ -54,8 +54,7 @@ class ReadingsEditDialog: BottomSheetDialogFragment(),
         super.onViewCreated(view, savedInstanceState)
 
         vm.result().observe(viewLifecycleOwner) { result ->
-            val bundle = Bundle().apply { putParcelable(result.key, result.content) }
-            parentFragmentManager.setFragmentResult(result.key, bundle)
+            parentFragmentManager.setFragmentResult(result.key, result.toBundle())
             dismiss()
         }
 

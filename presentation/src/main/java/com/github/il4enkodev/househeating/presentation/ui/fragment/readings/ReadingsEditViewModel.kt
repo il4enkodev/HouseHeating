@@ -12,6 +12,7 @@ import com.github.il4enkodev.househeating.presentation.ui.events.LiveEvent.Notif
 import com.github.il4enkodev.househeating.presentation.ui.events.ViewRequest
 import com.github.il4enkodev.househeating.presentation.ui.events.ViewResult
 import dagger.hilt.android.lifecycle.HiltViewModel
+import timber.log.Timber
 import java.time.format.DateTimeFormatter
 import java.time.temporal.TemporalAdjuster
 import java.util.regex.Pattern
@@ -24,10 +25,6 @@ class ReadingsEditViewModel @Inject constructor(
         @TimeFormatter private val timeFormatter: DateTimeFormatter,
         @ReadingPattern private val pattern: Pattern
 ): AndroidViewModel(app) {
-
-    companion object {
-        private const val TAG = "ReadingsEditViewModel"
-    }
 
     private val readings = MutableLiveData<ReadingModel>()
 
@@ -43,6 +40,7 @@ class ReadingsEditViewModel @Inject constructor(
     val dateText: LiveData<String> = readings.map { dateFormatter.format(it.time) }
 
     fun initialize(model: ReadingModel) {
+        Timber.i("Initializing with: $model")
         readings.value = model
         if (model.value != 0.0)
             readingText.value = model.value.toString()

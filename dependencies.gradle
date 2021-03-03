@@ -28,6 +28,7 @@ ext {
     constraintLayoutVersion = '2.0.4'
     legacySupportVersion = '1.0.0'
     lifecycleVersion = '2.3.0'
+    timberVersion = '4.7.1'
 
 
     presentationDependencies = [
@@ -47,7 +48,9 @@ ext {
             viewmodel:          "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycleVersion}",
 
             navFragment:        "androidx.navigation:navigation-fragment-ktx:$nav_version",
-            navUi:              "androidx.navigation:navigation-ui-ktx:$nav_version"
+            navUi:              "androidx.navigation:navigation-ui-ktx:$nav_version",
+
+            timber:             "com.jakewharton.timber:timber:$timberVersion"
     ]
 
     domainDependencies = [

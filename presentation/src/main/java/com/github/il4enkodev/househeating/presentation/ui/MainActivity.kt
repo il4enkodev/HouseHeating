@@ -15,10 +15,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    companion object {
-        private const val TAG = "MainActivity"
-    }
-
     private lateinit var fab: FloatingActionButton
     private lateinit var navView: NavigationView
     private lateinit var bottomBar: BottomAppBar
