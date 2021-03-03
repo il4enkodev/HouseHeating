@@ -7,9 +7,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import com.github.il4enkodev.househeating.R
-import com.github.il4enkodev.househeating.presentation.di.readings.DateFormatter
-import com.github.il4enkodev.househeating.presentation.di.readings.ReadingPattern
-import com.github.il4enkodev.househeating.presentation.di.readings.TimeFormatter
+import com.github.il4enkodev.househeating.presentation.di.qualifier.DateFormatter
+import com.github.il4enkodev.househeating.presentation.di.qualifier.ReadingPattern
+import com.github.il4enkodev.househeating.presentation.di.qualifier.TimeFormatter
 import com.github.il4enkodev.househeating.presentation.model.Readings
 import com.github.il4enkodev.househeating.presentation.ui.events.LiveEvent
 import com.github.il4enkodev.househeating.presentation.ui.events.LiveEvent.NotificationStrategy.NOTIFY_FIRST

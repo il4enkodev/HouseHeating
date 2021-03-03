@@ -14,7 +14,7 @@ import android.widget.TimePicker
 import androidx.fragment.app.viewModels
 import com.github.il4enkodev.househeating.R
 import com.github.il4enkodev.househeating.databinding.ReadingsEditDialogBinding
-import com.github.il4enkodev.househeating.presentation.di.readings.ReadingFilters
+import com.github.il4enkodev.househeating.presentation.di.qualifier.ReadingFilters
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -28,7 +28,8 @@ import javax.inject.Inject
 class ReadingsEditDialog: BottomSheetDialogFragment(),
         DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
-    @Inject @ReadingFilters lateinit var filters: Array<InputFilter>
+    @Inject @ReadingFilters
+    lateinit var filters: Array<InputFilter>
     private val viewModel: ReadingsEditViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater,

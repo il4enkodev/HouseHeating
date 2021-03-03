@@ -1,17 +1,21 @@
-package com.github.il4enkodev.househeating.presentation.di.readings
+package com.github.il4enkodev.househeating.presentation.di.module
 
 import android.text.InputFilter
+import com.github.il4enkodev.househeating.presentation.di.qualifier.DateFormatter
+import com.github.il4enkodev.househeating.presentation.di.qualifier.ReadingFilters
+import com.github.il4enkodev.househeating.presentation.di.qualifier.ReadingPattern
+import com.github.il4enkodev.househeating.presentation.di.qualifier.TimeFormatter
 import com.github.il4enkodev.househeating.presentation.ui.text.RegexInputFilter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityRetainedComponent
+import dagger.hilt.android.components.ViewModelComponent
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.util.regex.Pattern
 
 @Module
-@InstallIn(ActivityRetainedComponent::class)
+@InstallIn(ViewModelComponent::class)
 object ReadingsModule {
 
     @Provides

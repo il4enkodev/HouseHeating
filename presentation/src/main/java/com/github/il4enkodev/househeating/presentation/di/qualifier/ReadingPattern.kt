@@ -1,4 +1,4 @@
-package com.github.il4enkodev.househeating.presentation.di.readings
+package com.github.il4enkodev.househeating.presentation.di.qualifier
 
 import javax.inject.Qualifier
 
