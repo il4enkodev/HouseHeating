@@ -15,6 +15,8 @@ import androidx.fragment.app.viewModels
 import com.github.il4enkodev.househeating.R
 import com.github.il4enkodev.househeating.databinding.ReadingsEditDialogBinding
 import com.github.il4enkodev.househeating.presentation.di.qualifier.ReadingFilters
+import com.github.il4enkodev.househeating.presentation.ui.events.ViewRequest
+import com.github.il4enkodev.househeating.presentation.ui.events.ViewResult
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -30,13 +32,19 @@ class ReadingsEditDialog: BottomSheetDialogFragment(),
 
     @Inject @ReadingFilters
     lateinit var filters: Array<InputFilter>
-    private val viewModel: ReadingsEditViewModel by viewModels()
+    private val vm: ReadingsEditViewModel by viewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val readings = ReadingsEditDialogArgs.fromBundle(requireArguments()).reading
+        vm.initialize(readings)
+    }
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         val binding = ReadingsEditDialogBinding.inflate(inflater, container, false)
-        binding.viewModel = viewModel
+        binding.viewModel = vm
         binding.lifecycleOwner = viewLifecycleOwner
         binding.etReadings.filters = filters
         return binding.root
@@ -44,11 +52,18 @@ class ReadingsEditDialog: BottomSheetDialogFragment(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.navigationEvents().observe(viewLifecycleOwner) { event ->
-            when (event) {
-                is ReadingsNavEvent.EditDate -> openDateEditDialog(event.content)
-                is ReadingsNavEvent.EditTime -> openTimeEditDialog(event.content)
-                ReadingsNavEvent.Close -> dismiss()
+
+        vm.result().observe(viewLifecycleOwner) { result ->
+            val bundle = Bundle().apply { putParcelable(result.key, result.content) }
+            parentFragmentManager.setFragmentResult(result.key, bundle)
+            dismiss()
+        }
+
+        vm.requests().observe(viewLifecycleOwner) { request ->
+            when (request) {
+                is ViewRequest.EditDate -> openDateEditDialog(request.content)
+                is ViewRequest.EditTime -> openTimeEditDialog(request.content)
+                else -> Unit
             }
         }
     }
@@ -65,12 +80,12 @@ class ReadingsEditDialog: BottomSheetDialogFragment(),
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
         val date = LocalDate.of(year, Month.values()[month], dayOfMonth)
-        viewModel.dateSet(date)
+        vm.onViewResult(ViewResult.DateUpdated(date))
     }
 
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
         val time = LocalTime.of(hourOfDay, minute)
-        viewModel.timeSet(time)
+        vm.onViewResult(ViewResult.TimeUpdated(time))
     }
 
     private fun openTimeEditDialog(time: LocalTime) {

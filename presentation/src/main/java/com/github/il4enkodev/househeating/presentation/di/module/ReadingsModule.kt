@@ -9,13 +9,13 @@ import com.github.il4enkodev.househeating.presentation.ui.text.RegexInputFilter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.components.ActivityRetainedComponent
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.util.regex.Pattern
 
 @Module
-@InstallIn(ViewModelComponent::class)
+@InstallIn(ActivityRetainedComponent::class)
 object ReadingsModule {
 
     @Provides

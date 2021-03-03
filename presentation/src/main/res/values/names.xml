@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="navigation_sheet_behavior" translatable="false">com.github.il4enkodev.househeating.presentation.ui.behavior.NavigationSheetBehavior</string>
+</resources>

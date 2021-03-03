@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.github.il4enkodev.househeating.R
+import com.github.il4enkodev.househeating.presentation.model.ReadingModel
 import com.github.il4enkodev.househeating.presentation.ui.FabViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,9 +34,9 @@ class MeteringsLogFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         fabViewModel.clicks().observe(viewLifecycleOwner) {
-            findNavController().navigate(R.id.action_add_readings)
+            val reading = ReadingModel(ReadingModel.Type.START)
+            val action = MeteringsLogFragmentDirections.actionAddReadings(reading)
+            findNavController().navigate(action)
         }
     }
-
-
 }
