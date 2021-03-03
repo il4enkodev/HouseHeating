@@ -1,7 +1,10 @@
 package com.github.il4enkodev.househeating.presentation.ui.fragment.meterings
 
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class MeteringsLogViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+@HiltViewModel
+class MeteringsLogViewModel @Inject constructor() : ViewModel() {
+
 }

@@ -5,6 +5,9 @@
     <string name="nav_settings">Settings</string>
     <string name="measure_edit_save">Save</string>
 
+    <string name="readings_edit_hint_start">Readings at the start</string>
+    <string name="readings_edit_hint_end">Readings at the end</string>
+
     <!-- Not translatable -->
     <string name="navigation_sheet_behavior" translatable="false">
         com.github.il4enkodev.househeating.presentation.ui.behavior.NavigationSheetBehavior

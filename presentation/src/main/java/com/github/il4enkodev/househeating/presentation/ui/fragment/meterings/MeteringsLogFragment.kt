@@ -15,6 +15,10 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MeteringsLogFragment: Fragment() {
 
+    companion object {
+        private const val TAG = "MeteringsLogFragment"
+    }
+
     private val fabViewModel: FabViewModel by activityViewModels()
     private val viewModel: MeteringsLogViewModel by viewModels()
 
@@ -32,4 +36,6 @@ class MeteringsLogFragment: Fragment() {
             findNavController().navigate(R.id.action_add_readings)
         }
     }
+
+
 }

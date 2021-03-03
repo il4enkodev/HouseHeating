@@ -1,33 +1,96 @@
 package com.github.il4enkodev.househeating.presentation.ui.fragment.readings
 
 import android.annotation.SuppressLint
+import android.app.DatePickerDialog
 import android.app.Dialog
+import android.app.TimePickerDialog
 import android.os.Bundle
+import android.text.InputFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.DatePicker
+import android.widget.TimePicker
+import androidx.fragment.app.viewModels
 import com.github.il4enkodev.househeating.R
+import com.github.il4enkodev.househeating.databinding.ReadingsEditDialogBinding
+import com.github.il4enkodev.househeating.presentation.di.readings.ReadingFilters
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
+import java.time.LocalDate
+import java.time.LocalTime
+import java.time.Month
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class ReadingsEditDialog: BottomSheetDialogFragment() {
+class ReadingsEditDialog: BottomSheetDialogFragment(),
+        DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+
+    @Inject @ReadingFilters lateinit var filters: Array<InputFilter>
+    private val viewModel: ReadingsEditViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.readings_edit_dialog, container, false)
+                              savedInstanceState: Bundle?): View {
+        val binding = ReadingsEditDialogBinding.inflate(inflater, container, false)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.etReadings.filters = filters
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.navigationEvents().observe(viewLifecycleOwner) { event ->
+            when (event) {
+                is ReadingsNavEvent.EditDate -> openDateEditDialog(event.content)
+                is ReadingsNavEvent.EditTime -> openTimeEditDialog(event.content)
+                ReadingsNavEvent.Close -> dismiss()
+            }
+        }
     }
 
     @SuppressLint("RestrictedApi", "VisibleForTests")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog
-        dialog.behavior.disableShapeAnimations()
+        dialog.setOnShowListener {
+            dialog.behavior.disableShapeAnimations()
+            dialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }
         return dialog
+    }
+
+    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+        val date = LocalDate.of(year, Month.values()[month], dayOfMonth)
+        viewModel.dateSet(date)
+    }
+
+    override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
+        val time = LocalTime.of(hourOfDay, minute)
+        viewModel.timeSet(time)
+    }
+
+    private fun openTimeEditDialog(time: LocalTime) {
+        TimePickerDialog(
+                requireContext(),
+                R.style.ThemeOverlay_App_Dialog_Alert_TimePicker,
+                this,
+                time.hour,
+                time.minute,
+                true
+        ).show()
+    }
+
+    private fun openDateEditDialog(date: LocalDate) {
+        DatePickerDialog(
+                requireContext(),
+                R.style.ThemeOverlay_App_Dialog_Alert_DatePicker,
+                this,
+                date.year,
+                date.month.ordinal, // required 0..11
+                date.dayOfMonth
+        ).show()
     }
 }

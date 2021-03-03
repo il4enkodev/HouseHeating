@@ -32,5 +32,20 @@
         <item name="chipStyle">@style/Widget.App.ChipView</item>
     </style>
 
+    <style name="ThemeOverlay.App.Dialog" parent="ThemeOverlay.AppCompat.Dialog" />
+
+    <style name="ThemeOverlay.App.Dialog.Alert" parent="ThemeOverlay.App.Dialog">
+        <item name="buttonBarButtonStyle">?attr/dialogButtonStyle</item>
+        <item name="colorControlActivated">?attr/colorPrimary</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Dialog.Alert.DatePicker" parent="ThemeOverlay.App.Dialog.Alert">
+        <item name="android:datePickerStyle">@style/Widget.App.DatePicker</item>
+        <item name="colorOnPrimary">@color/date_picker_header_colors</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Dialog.Alert.TimePicker" parent="ThemeOverlay.App.Dialog.Alert">
+        <item name="android:timePickerStyle">@style/Widget.App.TimePicker</item>
+    </style>
 
 </resources>

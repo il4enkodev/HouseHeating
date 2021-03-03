@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-android'
     id "androidx.navigation.safeargs.kotlin"
     id 'kotlin-kapt'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -47,7 +48,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     def presentationDependencies = rootProject.ext.presentationDependencies
 
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.1'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 
     implementation project(':domain')
     implementation project(':data')
@@ -66,8 +67,8 @@ dependencies {
     implementation presentationDependencies.livedata
     implementation presentationDependencies.viewmodel
 
-    implementation presentationDependencies.navFragment
-    implementation presentationDependencies.navUi
+    implementation "androidx.navigation:navigation-fragment-ktx:2.3.3"
+    implementation "androidx.navigation:navigation-ui-ktx:2.3.3"
 }
 
 repositories {

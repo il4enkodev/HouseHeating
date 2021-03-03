@@ -3,6 +3,7 @@ package com.github.il4enkodev.househeating.presentation.ui
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
 import androidx.navigation.ui.setupWithNavController
 import com.github.il4enkodev.househeating.R
 import com.github.il4enkodev.househeating.presentation.ui.behavior.NavigationSheetBehavior
@@ -14,6 +15,10 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        private const val TAG = "MainActivity"
+    }
+
     private lateinit var fab: FloatingActionButton
     private lateinit var navView: NavigationView
     private lateinit var bottomBar: BottomAppBar
@@ -21,9 +26,13 @@ class MainActivity : AppCompatActivity() {
 
     private val fabViewModel: FabViewModel by viewModels()
 
+    private lateinit var navController: NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        navController = findNavController()
 
         bottomBar = findViewById(R.id.bottomBar)
         setSupportActionBar(bottomBar)
@@ -32,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         navView = findViewById(R.id.navView)
-        navView.setupWithNavController(findNavController())
+        navView.setupWithNavController(navController)
 
         behavior = NavigationSheetBehavior.from(navView)
 

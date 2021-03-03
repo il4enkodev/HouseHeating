@@ -15,7 +15,8 @@
             app:destination="@id/meteringDetailFragment" />
         <action
             android:id="@+id/action_add_readings"
-            app:destination="@id/readingsEditDialog" />
+            app:destination="@id/readingsEditDialog">
+        </action>
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
