@@ -5,7 +5,6 @@ import android.app.DatePickerDialog
 import android.app.Dialog
 import android.app.TimePickerDialog
 import android.os.Bundle
-import android.text.InputFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,6 @@ import android.widget.TimePicker
 import androidx.fragment.app.viewModels
 import com.github.il4enkodev.househeating.R
 import com.github.il4enkodev.househeating.databinding.ReadingsEditDialogBinding
-import com.github.il4enkodev.househeating.presentation.di.qualifier.ReadingFilters
 import com.github.il4enkodev.househeating.presentation.ui.events.ViewRequest
 import com.github.il4enkodev.househeating.presentation.ui.events.ViewResult
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -24,14 +22,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.Month
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class ReadingsEditDialog: BottomSheetDialogFragment(),
         DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
-    @Inject @ReadingFilters
-    lateinit var filters: Array<InputFilter>
     private val vm: ReadingsEditViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,9 +39,8 @@ class ReadingsEditDialog: BottomSheetDialogFragment(),
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         val binding = ReadingsEditDialogBinding.inflate(inflater, container, false)
-        binding.viewModel = vm
+        binding.vm = vm
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.etReadings.filters = filters
         return binding.root
     }
 

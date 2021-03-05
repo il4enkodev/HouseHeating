@@ -1,10 +1,10 @@
 package com.github.il4enkodev.househeating.presentation.ui.fragment.readings
 
 import android.app.Application
-import androidx.lifecycle.*
-import com.github.il4enkodev.househeating.R
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import com.github.il4enkodev.househeating.presentation.di.qualifier.DateFormatter
-import com.github.il4enkodev.househeating.presentation.di.qualifier.ReadingPattern
 import com.github.il4enkodev.househeating.presentation.di.qualifier.TimeFormatter
 import com.github.il4enkodev.househeating.presentation.model.ReadingModel
 import com.github.il4enkodev.househeating.presentation.ui.events.LiveEvent
@@ -15,41 +15,28 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import timber.log.Timber
 import java.time.format.DateTimeFormatter
 import java.time.temporal.TemporalAdjuster
-import java.util.regex.Pattern
 import javax.inject.Inject
 
 @HiltViewModel
 class ReadingsEditViewModel @Inject constructor(
         app: Application,
-        @DateFormatter private val dateFormatter: DateTimeFormatter,
-        @TimeFormatter private val timeFormatter: DateTimeFormatter,
-        @ReadingPattern private val pattern: Pattern
+        @DateFormatter val dateFormatter: DateTimeFormatter,
+        @TimeFormatter val timeFormatter: DateTimeFormatter,
+        val input: ReadingInputHelper
 ): AndroidViewModel(app) {
 
-    private val readings = MutableLiveData<ReadingModel>()
-
-    val hint: LiveData<String> = readings.map { readings ->
-        when (readings.type) {
-            ReadingModel.Type.START -> app.getString(R.string.readings_edit_hint_start)
-            ReadingModel.Type.END -> app.getString(R.string.readings_edit_hint_end)
-        }
+    val readings = MediatorLiveData<ReadingModel>().apply {
+        addSource(input.number) { value = value?.copy(value=it) }
     }
-
-    val readingText = MediatorLiveData<String>()
-    val timeText: LiveData<String> = readings.map { timeFormatter.format(it.time) }
-    val dateText: LiveData<String> = readings.map { dateFormatter.format(it.time) }
 
     fun initialize(model: ReadingModel) {
         Timber.i("Initializing with: $model")
         readings.value = model
-        if (model.value != 0.0)
-            readingText.value = model.value.toString()
+        input.set(model.value)
     }
 
-    fun saveAllowed(): LiveData<Boolean> = readingText.map { text ->
-        pattern.matcher(text).matches()
-    }
-
+    // <--[Navigate to another view]-- View <--[request(editTime, editDate, etc)]-- ViewModel
+    // --[result(timeUpdated, dateUpdated, etc)]--> View --> ViewModel.onViewResult()
     private val requests = LiveEvent<ViewRequest<*>>(NOTIFY_FIRST)
     fun requests(): LiveData<ViewRequest<*>> = requests
 
@@ -75,13 +62,12 @@ class ReadingsEditViewModel @Inject constructor(
     }
 
     fun saveClicked() {
-        readings.value = readings.value!!.copy(value=readingText.value!!.toDouble())
         result.push(ViewResult.ReadingUpdated(readings.value))
     }
 
     private fun updateDateTime(adjuster: TemporalAdjuster?) {
         if (adjuster == null) return
-        readings.value = readings.value!!.let {
+        readings.value = readings.value?.let {
             it.copy(time=it.time.with(adjuster))
         }
     }

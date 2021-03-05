@@ -5,7 +5,7 @@
 
     <data>
         <variable
-            name="viewModel"
+            name="vm"
             type="com.github.il4enkodev.househeating.presentation.ui.fragment.readings.ReadingsEditViewModel" />
     </data>
 
@@ -23,7 +23,7 @@
             app:layout_constraintBottom_toTopOf="@+id/btnSave"
             android:layout_marginBottom="@dimen/view_spacing_medium"
             app:layout_constraintEnd_toEndOf="parent"
-            android:hint="@{viewModel.hint}"
+            android:hint="@{vm.readings.isAtTheStart ? @string/readings_edit_hint_start : @string/readings_edit_hint_end}"
             tools:hint="Readings">
 
             <!--suppress AndroidUnknownAttribute -->
@@ -32,7 +32,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
-                android:text="@={viewModel.readingText}" />
+                app:filter="@{vm.input.filter}"
+                android:text="@={vm.input.text}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.chip.Chip
@@ -42,8 +43,9 @@
             app:chipIcon="@drawable/ic_date"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:text="@{viewModel.dateText}"
-            android:onClick="@{v -> viewModel.dateClicked()}"
+            app:datetime="@{vm.readings.time}"
+            app:formatter="@{vm.dateFormatter}"
+            android:onClick="@{v -> vm.dateClicked()}"
             tools:text="02.03.21"/>
 
         <com.google.android.material.chip.Chip
@@ -54,8 +56,9 @@
             app:layout_constraintStart_toEndOf="@id/chipDate"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginStart="@dimen/view_spacing_small"
-            android:text="@{viewModel.timeText}"
-            android:onClick="@{v -> viewModel.timeClicked()}"
+            app:datetime="@{vm.readings.time}"
+            app:formatter="@{vm.timeFormatter}"
+            android:onClick="@{v -> vm.timeClicked()}"
             tools:text="12:00"/>
 
         <com.google.android.material.button.MaterialButton
@@ -66,8 +69,8 @@
             android:text="@string/measure_edit_save"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:onClick="@{v -> viewModel.saveClicked()}"
-            android:enabled="@{viewModel.saveAllowed()}"
+            android:onClick="@{v -> vm.saveClicked()}"
+            android:enabled="@{vm.readings.value != null}"
             tools:text="Save" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
