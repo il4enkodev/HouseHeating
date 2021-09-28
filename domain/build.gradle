@@ -19,6 +19,7 @@ dependencies {
     def domainDependencies = rootProject.ext.domainDependencies
 
     implementation domainDependencies.kotlin
+    implementation domainDependencies.coroutines
     compileOnly domainDependencies.javaxAnnotation
 
     implementation domainDependencies.javaxInject

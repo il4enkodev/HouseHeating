@@ -45,7 +45,8 @@ dependencies {
     def dataDependencies = rootProject.ext.dataDependencies
 
     implementation project(':domain')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.4.31"
+    implementation dataDependencies.kotlin
+    implementation dataDependencies.coroutines
     compileOnly dataDependencies.javaxAnnotation
     implementation dataDependencies.javaxInject
     implementation dataDependencies.rxJava
