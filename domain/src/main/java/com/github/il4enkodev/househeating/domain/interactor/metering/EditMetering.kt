@@ -1,19 +1,19 @@
 package com.github.il4enkodev.househeating.domain.interactor.metering
 
+import com.github.il4enkodev.househeating.domain.di.IoDispatcher
 import com.github.il4enkodev.househeating.domain.entity.metering.CompletedMetering
-import com.github.il4enkodev.househeating.domain.interactor.SchedulerSwitcher
-import com.github.il4enkodev.househeating.domain.interactor.UseCaseSingle
+import com.github.il4enkodev.househeating.domain.interactor.UseCase
 import com.github.il4enkodev.househeating.domain.repository.MeteringRepository
-import io.reactivex.Single
+import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
 
 class EditMetering @Inject internal constructor(
-        schedulerSwitcher: SchedulerSwitcher<CompletedMetering>,
-        private val meteringRepository: MeteringRepository
-) : UseCaseSingle<CompletedMetering, EditMetering.Arguments>(schedulerSwitcher) {
+    @IoDispatcher private val dispatcher: CoroutineDispatcher,
+    private val meteringRepository: MeteringRepository
+) : UseCase<EditMetering.Arguments, CompletedMetering, >(dispatcher) {
 
-    override fun source(arguments: Arguments): Single<CompletedMetering> {
-        throw UnsupportedOperationException("Not implemented")
+    override suspend fun execute(arguments: Arguments): CompletedMetering {
+        TODO("Not yet implemented")
     }
 
     class Arguments

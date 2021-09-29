@@ -4,20 +4,18 @@ import com.github.il4enkodev.househeating.domain.entity.metering.CompletedMeteri
 import com.github.il4enkodev.househeating.domain.entity.metering.ContinuingMetering
 import com.github.il4enkodev.househeating.domain.entity.metering.MeterReadings
 import com.github.il4enkodev.househeating.domain.entity.metering.Metering
-import io.reactivex.Completable
-import io.reactivex.Observable
-import io.reactivex.Single
+import kotlinx.coroutines.flow.Flow
 
 interface MeteringRepository {
-    fun create(onStart: MeterReadings?, onComplete: MeterReadings?): Single<CompletedMetering>
-    fun observe(): Observable<List<CompletedMetering>>
-    fun current(): Observable<Metering<Double>>
-    fun startMetering(readings: MeterReadings): Single<ContinuingMetering>
-    fun stopMetering(readings: MeterReadings): Single<CompletedMetering>
-    operator fun get(id: String): Single<CompletedMetering>
-    fun update(id: String,
+    fun current(): Flow<Metering<Double>>
+    fun observe(): Flow<List<CompletedMetering>>
+    suspend fun create(onStart: MeterReadings?, onComplete: MeterReadings?): CompletedMetering
+    suspend fun startMetering(readings: MeterReadings): ContinuingMetering
+    suspend fun stopMetering(readings: MeterReadings): CompletedMetering
+    suspend fun get(id: String): CompletedMetering
+    suspend fun update(id: String,
                onStart: MeterReadings?,
-               onComplete: MeterReadings?): Single<CompletedMetering>
+               onComplete: MeterReadings?): CompletedMetering
 
-    fun delete(id: String): Completable
+    suspend fun delete(id: String)
 }

@@ -1,19 +1,19 @@
 package com.github.il4enkodev.househeating.domain.interactor.metering
 
+import com.github.il4enkodev.househeating.domain.di.IoDispatcher
 import com.github.il4enkodev.househeating.domain.entity.metering.ContinuingMetering
 import com.github.il4enkodev.househeating.domain.entity.metering.MeterReadings
-import com.github.il4enkodev.househeating.domain.interactor.SchedulerSwitcher
-import com.github.il4enkodev.househeating.domain.interactor.UseCaseSingle
+import com.github.il4enkodev.househeating.domain.interactor.UseCase
 import com.github.il4enkodev.househeating.domain.repository.MeteringRepository
-import io.reactivex.Single
+import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
 
 class StartMetering @Inject internal constructor(
-        schedulerSwitcher: SchedulerSwitcher<ContinuingMetering>,
-        private val meteringRepository: MeteringRepository
-) : UseCaseSingle<ContinuingMetering, MeterReadings>(schedulerSwitcher) {
+    @IoDispatcher private val dispatcher: CoroutineDispatcher,
+    private val meteringRepository: MeteringRepository
+) : UseCase<MeterReadings, ContinuingMetering>(dispatcher) {
 
-    override fun source(arguments: MeterReadings): Single<ContinuingMetering> {
+    override suspend fun execute(arguments: MeterReadings): ContinuingMetering {
         return meteringRepository.startMetering(arguments)
     }
 }
